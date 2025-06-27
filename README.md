@@ -1,5 +1,7 @@
 # Iris Flower Classification
 
+📎 [Open in Google Colab](https://colab.research.google.com/drive/1HemAnPlRF5b7a67IyBCBvnY3nz0LTudI?usp=sharing)
+
 ## Project Overview  
 Iris Flower Classification is a classic machine learning task that involves classifying iris flowers into three species based on features like sepal length, sepal width, petal length, and petal width. This project demonstrates data preprocessing, exploratory data analysis (EDA), and the application of classification algorithms.
 
