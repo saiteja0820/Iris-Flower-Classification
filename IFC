@@ -1,0 +1,53 @@
+import numpy as np
+import pandas as pd
+import os
+
+df = pd.read_csv('/content/Iris.csv', index_col=0)
+
+df.describe()
+
+df.isna().sum()
+
+df.info()
+
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+df.Species = le.fit_transform(df.Species)
+
+import seaborn as sns
+corr = df.corr()
+sns.heatmap(corr,cmap='coolwarm',annot=True)
+
+import matplotlib.pyplot as plt
+plt.figure(figsize=(20, 16))
+plt.subplot(221)
+sns.barplot(data=df, x = 'SepalLengthCm', y = 'Species')
+
+plt.subplot(222)
+sns.barplot(data=df, x = 'SepalWidthCm', y = 'Species')
+
+plt.subplot(223)
+sns.barplot(data=df, x = 'PetalLengthCm', y = 'Species')
+
+plt.subplot(224)
+sns.barplot(data=df, x = 'PetalWidthCm', y = 'Species')
+
+df.drop(['SepalWidthCm'], inplace=True, axis = 1)
+
+X = df.drop(['Species'], axis = 1).values
+y = df.Species.values
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train,y_test = train_test_split(X,y, train_size=.8, random_state=23)
+X_train.shape, X_test.shape, y_train.shape,y_test.shape
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import r2_score, classification_report
+model = LogisticRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("model score ", model.score(X_train, y_train))
+print("r2 score: ", r2_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+
